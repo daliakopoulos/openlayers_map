@@ -2,7 +2,7 @@
   "name": "openlayers-demo",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "js/main.js",
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -6,7 +6,6 @@ import {Vector as VectorSource} from "ol/source";
 import {Vector as VectorLayer} from "ol/layer";
 
 
-
 const map = new Map({
     target: 'map',
     view: new View({
@@ -30,4 +29,4 @@ const vector = new VectorLayer({
 
 const rasterStatistics = new RasterStatistics(map, vector);
 const draw = new DrawPolygon(map, vector);
-draw.onDrawn(rasterStatistics.plot)
+draw.onDrawEnd(rasterStatistics.plot)
