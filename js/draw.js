@@ -11,6 +11,7 @@ export class DrawPolygon {
         this.drawInteraction = getBoxDrawInteraction(this.vectorLayer);
         this.map.addInteraction(this.drawInteraction);
         this.drawEndCallbacks = [];
+        this.drawStartCallbacks = [];
         this.initOnDrawEndCallbacks();
         this.initOnDraStartCallbacks();
     }
@@ -18,6 +19,10 @@ export class DrawPolygon {
 
     onDrawEnd(callback) {
         this.drawEndCallbacks.push(callback)
+    }
+
+    onDrawStart(callback) {
+        this.drawStartCallbacks.push(callback)
     }
 
     clear() {
@@ -34,6 +39,7 @@ export class DrawPolygon {
         let self = this;
         this.drawInteraction.on('drawstart', (evt) => {
             self.clear();
+            this.drawStartCallbacks.forEach((c) => c(evt.feature))
         });
     }
 }

@@ -29,4 +29,5 @@ const vector = new VectorLayer({
 
 const rasterStatistics = new RasterStatistics(map, vector);
 const draw = new DrawPolygon(map, vector);
-draw.onDrawEnd(rasterStatistics.plot)
+draw.onDrawEnd((x) => rasterStatistics.plot.call(rasterStatistics, x))
+draw.onDrawStart((x) => rasterStatistics.clear.call(rasterStatistics, x))
