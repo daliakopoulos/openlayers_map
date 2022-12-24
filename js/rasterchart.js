@@ -1,12 +1,14 @@
 
 
 let timer = null;
-function schedulePlot(resolution, counts, threshold) {
+export const bins = 10;
+
+export function schedulePlot(resolution, counts, threshold, raster) {
     if (timer) {
         clearTimeout(timer);
         timer = null;
     }
-    timer = setTimeout(plot.bind(null, resolution, counts, threshold), 1000 / 60);
+    timer = setTimeout(plot.bind(null, resolution, counts, threshold, raster), 1000 / 60);
 }
 
 const barWidth = 15;
@@ -20,7 +22,7 @@ const chart = d3
 const chartRect = chart.node().getBoundingClientRect();
 const tip = d3.select(document.body).append('div').attr('class', 'tip');
 
-function plot(resolution, counts, threshold) {
+function plot(resolution, counts, threshold, raster) {
     const yScale = d3
         .scaleLinear()
         .domain([0, d3.max(counts.values)])

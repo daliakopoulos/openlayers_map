@@ -1,10 +1,11 @@
 import {getSatelliteTileLayer} from "./utils";
 import {createCounts, getRasterImageLayer} from "./rasterutils";
+import {bins, schedulePlot} from "./rasterchart";
 
 // Constants
 const minVgi = 0;
 const maxVgi = 0.5;
-const bins = 10;
+
 
 
 export class RasterStatistics {
@@ -20,7 +21,7 @@ export class RasterStatistics {
     initRasterSourceAfterOperationsCallback() {
         let raster = this.satelliteRasterLayer.getSource();
         raster.on('afteroperations', function (event) {
-            // TODO plot
+            schedulePlot(event.resolution, event.data.counts, event.data.threshold, raster);
         });
     }
 
